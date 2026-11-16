@@ -1,0 +1,29 @@
+{
+  "deployments": ["ocid1.apideployment.oc1..d1", "ocid1.apideployment.oc1..d2"],
+  "usage_plans": [
+    {
+      "ocid": "ocid1.apigatewayusageplan.oc1..p1",
+      "display_name": "partner-plan",
+      "entitlements": [
+        {"name": "partner-basic", "rate_limit": null, "quota": null,
+         "target_deployments": ["ocid1.apideployment.oc1..d1"]},
+        {"name": "partner-soft", "rate_limit": {"value": 10, "unit": "SECOND"},
+         "quota": {"value": 100000, "unit": "MONTH", "operation_on_breach": "ALLOW"},
+         "target_deployments": ["ocid1.apideployment.oc1..d1"]}
+      ]
+    },
+    {
+      "ocid": "ocid1.apigatewayusageplan.oc1..p2",
+      "display_name": "internal-plan",
+      "entitlements": [
+        {"name": "internal-standard", "rate_limit": {"value": 50, "unit": "SECOND"},
+         "quota": {"value": 500000, "unit": "MONTH", "operation_on_breach": "REJECT"},
+         "target_deployments": ["ocid1.apideployment.oc1..d2"]}
+      ]
+    }
+  ],
+  "subscribers": [
+    {"ocid": "ocid1.apigatewaysubscriber.oc1..s1", "display_name": "acme-partner",
+     "usage_plan_ids": ["ocid1.apigatewayusageplan.oc1..p1"]}
+  ]
+}
