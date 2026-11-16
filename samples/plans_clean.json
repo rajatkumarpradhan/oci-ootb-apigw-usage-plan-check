@@ -1,0 +1,18 @@
+{
+  "deployments": ["ocid1.apideployment.oc1..d9"],
+  "usage_plans": [
+    {
+      "ocid": "ocid1.apigatewayusageplan.oc1..p9",
+      "display_name": "public-plan",
+      "entitlements": [
+        {"name": "public-standard", "rate_limit": {"value": 25, "unit": "SECOND"},
+         "quota": {"value": 250000, "unit": "MONTH", "operation_on_breach": "REJECT"},
+         "target_deployments": ["ocid1.apideployment.oc1..d9"]}
+      ]
+    }
+  ],
+  "subscribers": [
+    {"ocid": "ocid1.apigatewaysubscriber.oc1..s9", "display_name": "mobile-app",
+     "usage_plan_ids": ["ocid1.apigatewayusageplan.oc1..p9"]}
+  ]
+}
